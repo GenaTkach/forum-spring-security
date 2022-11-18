@@ -19,6 +19,8 @@ public class AuthorizationConfiguration {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests(authorize -> authorize
 						.mvcMatchers("/account/register/**", "/forum/posts/**").permitAll()
+						.mvcMatchers("/account/password/**").authenticated()
+						.mvcMatchers("/**").access("@customSecurity.checkPasswordLimitation(authentication.name)")
 						.mvcMatchers("/account/user/*/role/*/**").hasRole("ADMINISTRATOR")
 						.mvcMatchers(HttpMethod.PUT, "/account/user/{login}/**").access("#login == authentication.name")
 						.mvcMatchers(HttpMethod.DELETE, "/account/user/{login}/**").access("#login == authentication.name or hasRole('ADMINISTRATOR')")
