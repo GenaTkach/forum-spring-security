@@ -30,7 +30,7 @@ public class CustomWebSecurity {
 	UserAccount userAccount = userRepository.findById(login)
 		.orElse(null);
 	long period = ChronoUnit.DAYS.between(userAccount.getPasswordCreationDate(), LocalDate.now());
-	return period > 30 ? false : true;
+	return period < 30;
     }
 
 }

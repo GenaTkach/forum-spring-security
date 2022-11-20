@@ -84,6 +84,7 @@ public class UserAccountServiceImpl implements UserAccountService, CommandLineRu
 		UserAccount userAccount = repository.findById(login).orElseThrow(() -> new UserNotFoundException());
 		String password = passwordEncoder.encode(newPassword);
 		userAccount.setPassword(password);
+		userAccount.setPasswordCreationDate(LocalDate.now());
 		repository.save(userAccount);
 	}
 	

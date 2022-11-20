@@ -38,6 +38,7 @@ public class UserAccount {
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.passwordCreationDate = LocalDate.now();
 	}
 
 	public boolean addRole(String role) {
